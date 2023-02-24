@@ -1,9 +1,6 @@
 .logo{
-	width: 100px;
-	height: 100px;
-
+	width: 150px;
+	height: 150px;
+	background: linear-gradient(89deg, #04C8DE  0%, #FF5EDF 100%);
 }
 
-.Tilt {
-	background: linear-gradient(89deg, #FF5EDF 0%, #04C8DE 100%);
-}
