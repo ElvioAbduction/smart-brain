@@ -5,6 +5,8 @@ import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm'
 import Rank from './components/Rank/Rank';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+import Signin from './components/Signin/Signin';
+import Register from './components/Register/Register';
 
 class App extends Component{
   constructor(){
@@ -12,7 +14,8 @@ class App extends Component{
     this.state = {
       input: '',
       imgUrl:'',
-      box: {}
+      box: {},
+      route: 'signin',
     }
   }
 
@@ -40,14 +43,12 @@ displayFaceBox = (box) => {
 
   onInputChange = (event) => {
     console.log(event.target.value)
-    this.setState( {input: event.target.value});
+    this.setState( {imgUrl: event.target.value});
   }
 
 
   onSubmit = () => {
     console.log('click');
-    var inputState = this.state.input;
-    this.setState( {imgUrl: inputState});
     // Your PAT (Personal Access Token) can be found in the portal under Authentification
     const PAT = 'c0a86033734d40b3b7da75f8095c7452';
     // Specify the correct user_id/app_id pairings
@@ -96,22 +97,32 @@ displayFaceBox = (box) => {
         .then(response => response.json())
         .then(result => this.displayFaceBox(this.calculateFaceLocation(result)))
         .catch(error => console.log('error', error));
+  }
 
-      
 
-
+  onRouteChange = (route) => {
+    this.setState({ route: route });
   }
 
 render(){
   return (
     <div className="App">
      
-      <Navigation />
+      <Navigation onRouteChange={this.onRouteChange} />
       <Logo />
-      <Rank />
-      <ImageLinkForm onSubmit={this.onSubmit} onInputChange={this.onInputChange}/>
-      <FaceRecognition box={this.state.box} imgUrl={this.state.imgUrl} />
-    </div>
+      {this.state.route === 'home'?
+          <div>
+            <Rank />
+            <ImageLinkForm onSubmit={this.onSubmit} onInputChange={this.onInputChange}/>
+            <FaceRecognition box={this.state.box} imgUrl={this.state.imgUrl} />
+          </div>
+          :(
+            this.state.route === 'signin'?
+            <Signin onRouteChange={this.onRouteChange} />
+            : <Register onRouteChange={this.onRouteChange} />
+            )
+  }
+  </div>
   );
  }
 }
