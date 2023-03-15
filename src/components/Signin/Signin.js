@@ -18,7 +18,7 @@ onPasswordChange = (event) => {
 }
 
 
-onSubmitSignIn = (route) => {
+onSubmitSignIn = () => {
 	fetch('http://localhost:3000/signin', {
 		method: 'post',
 		headers: {'Content-Type': 'application/json'},
@@ -27,15 +27,21 @@ onSubmitSignIn = (route) => {
 			password: this.state.signInPassword
 		})
 	})
-	this.props.onRouteChange(route);
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+		if (data === 'success'){
+			this.props.onRouteChange('home');
+			}
+	})
+	
 }
 
 	render(){
-		const { onRouteChange } = this.props;
 	return(
 		<article className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
 					<main className="pa4 black-80">
-			  <form className="measure">
+			  <form className="measure" >
 			    <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
 			      <legend className="center f3 fw6 ph0 mh0">Sign In</legend>
 			      <div className="mt3">
