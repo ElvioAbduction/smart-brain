@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
 
-const Rank = () => {
+const Rank = ({userName, userEntries}) => {
  
 	return(
 		<div>
 			<div className='white f3'>
-				{'<user> your rank is...'}
+				{'Hi '+userName+' your current entry count is...'}
 			</div>
 			<div className='white f1'>
-				{'#1'}
+				{userEntries}
 			</div>
 		</div>
 		)

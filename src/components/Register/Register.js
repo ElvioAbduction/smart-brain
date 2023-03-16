@@ -23,7 +23,7 @@ class Register extends React.Component {
 	}
 
 
-	onSubmitRegister = (route) =>{
+	onSubmitRegister = (event) =>{
 		fetch('http://localhost:3000/register', {
 		method: 'post',
 		headers: {'Content-Type': 'application/json'},
@@ -36,10 +36,12 @@ class Register extends React.Component {
 		.then(response => response.json())
 		.then(user => {
 		if (user){
-			this.props.onRouteChange(route);
+			this.props.loadUser(user);
+			this.props.onRouteChange('home');
 			console.log(user);
 			}
 		})
+		event.preventDefault();
 	}
 
 render(){
@@ -81,7 +83,12 @@ render(){
 			      </div>
 			    </fieldset>
 			    <div className="">
-			      <input className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Register"  onClick={() => this.onSubmitRegister('home')} />
+			      <input 
+			      	className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
+			      	type="submit" 
+			      	value="Register"  
+			      	onClick={this.onSubmitRegister} 
+			      />
 			    </div>
 			    <div className="lh-copy mt3">
 			      <p onClick={() => this.props.onRouteChange('signin')} className="f6 link dim black db pointer">Sign in</p>
