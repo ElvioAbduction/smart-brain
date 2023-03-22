@@ -30,7 +30,7 @@ onSubmitSignIn = (event) => {
 	.then(response => response.json())
 	.then(user => {
 		console.log(user);
-		if (user.id){
+		if (user.UserID){
 			this.props.loadUser(user);
 			this.props.onRouteChange('home');
 			}

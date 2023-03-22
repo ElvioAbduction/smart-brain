@@ -30,11 +30,11 @@ class App extends Component{
 
  loadUser = (user) => {
   this.setState({user: {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        entries: user.entries,
-        joined: user.joined
+        id: user.UserID,
+        email: user.Email,
+        name: user.Name,
+        entries: user.Entries,
+        joined: user.Joined
   }})
  }
 
